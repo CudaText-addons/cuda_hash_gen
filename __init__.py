@@ -4,12 +4,12 @@ from .proc_hash import *
 HASH_KINDS = (
   'MD4',
   'MD5',
-  'RIPEMD160',
   'SHA1',
   'SHA224',
   'SHA256',
   'SHA384',
   'SHA512',
+  'RIPEMD160',
   'Whirlpool'
   )
 HASH_KIND_INITIAL = 1
