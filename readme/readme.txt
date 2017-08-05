@@ -5,6 +5,7 @@ You can calculate hash for a file (choose it from dialog) or for a custom string
 Also you can paste some known hash string to the bottom input, and it's compared to calculated hash string, by "Verify" button, or after calculating hash value. Label in dialog will show "Verified" or "?".
 
 Currently supported hashes: 
+MD4
 MD5
 SHA1
 SHA256

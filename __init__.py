@@ -2,12 +2,13 @@ from cudatext import *
 from .proc_hash import *
 
 HASH_KINDS = (
+  'MD4',
   'MD5',
   'SHA1',
   'SHA256',
   'SHA512',
   )
-HASH_KIND_INIT = 0
+HASH_KIND_INIT = 1
 
 
 class Command:
