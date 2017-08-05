@@ -6,16 +6,15 @@ HASH_KINDS = (
   'SHA1',
   'SHA256',
   'SHA512',
-  'CRC32'
   )
-HASH_KIND_INIT = 1
+HASH_KIND_INIT = 0
 
 
 class Command:
 
     def calc(self, id_dlg, data, is_file):
 
-        caption = '&Hash -- '+('file' if is_file else 'string')
+        caption = '&Hash -- of '+('file' if is_file else 'string')+':'
         dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='label_hash', prop={'cap': caption} )
 
         index = int(dlg_proc(id_dlg, DLG_CTL_PROP_GET, name='combo_type')['val'])
@@ -24,7 +23,10 @@ class Command:
         res = get_hash_universal(kind, data, is_file)
         dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='edit_hash', prop={'val':res} )
 
+        #console log
         print('Hash', kind, 'of', ('file:' if is_file else 'string:'), repr(data) )
+        #must verify too
+        self.callback_btn_verify(id_dlg, 0)
 
 
     def callback_btn_string(self, id_dlg, id_ctl, data='', info=''):
