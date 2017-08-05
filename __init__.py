@@ -2,9 +2,10 @@ from cudatext import *
 from .proc_hash import *
 
 HASH_KINDS = (
-  'MD4',
   'MD5',
   'SHA1',
+  'SHA256',
+  'SHA512',
   'CRC32'
   )
 HASH_KIND_INIT = 1
@@ -71,7 +72,7 @@ class Command:
     def init_dlg(self):
 
         h=dlg_proc(0, DLG_CREATE)
-        dlg_proc(h, DLG_PROP_SET, prop={'cap':'Hash Generator', 'w':570, 'h':320 })
+        dlg_proc(h, DLG_PROP_SET, prop={'cap':'Hash Generator', 'w':670, 'h':320 })
 
         n=dlg_proc(h, DLG_CTL_ADD, 'label')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_type', 'cap':'Hash &type:', 'x':6, 'y':10, 'w':120 } )
@@ -85,10 +86,10 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'chk_from_str', 'cap':'Calculate hash from &string:', 'x':6, 'y':40, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_string', 'x':6, 'y':60, 'w':450 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_string', 'x':6, 'y':60, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_string', 'cap':'C&alculate', 'x':460, 'y':60, 'w':100,
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_string', 'cap':'C&alculate', 'x':560, 'y':60, 'w':100,
           'on_change': self.callback_btn_string } )
 
 
@@ -96,10 +97,10 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'chk_from_file', 'cap':'Calculate hash from &file:', 'x':6, 'y':95, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_file', 'props':(True,False,True), 'x':6, 'y':115, 'w':450 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_file', 'props':(True,False,True), 'x':6, 'y':115, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_file', 'cap':'&Browse...', 'x':460, 'y':115, 'w':100,
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_file', 'cap':'&Browse...', 'x':560, 'y':115, 'w':100,
           'on_change': self.callback_btn_file } )
 
 
@@ -107,10 +108,10 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_hash', 'cap':'&Hash value:', 'x':6, 'y':150, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'props':(False,True,True), 'x':6, 'y':170, 'w':450 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'props':(False,True,True), 'x':6, 'y':170, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_copy', 'cap':'&Copy', 'x':460, 'y':170, 'w':100,
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_copy', 'cap':'&Copy', 'x':560, 'y':170, 'w':100,
           'on_change': self.callback_btn_copy } )
 
 
@@ -121,15 +122,15 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_verify_res', 'cap':'?', 'props':True, 'x':100, 'y':205, 'w':355 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_verify', 'props':(False,True,True), 'x':6, 'y':225, 'w':450 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_verify', 'props':(False,True,True), 'x':6, 'y':225, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_verify', 'cap':'&Verify', 'x':460, 'y':225, 'w':100,
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_verify', 'cap':'&Verify', 'x':560, 'y':225, 'w':100,
           'on_change': self.callback_btn_verify } )
 
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_close', 'cap':'Close', 'x':460, 'y':290, 'w':100,
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_close', 'cap':'Close', 'x':560, 'y':290, 'w':100,
           'on_change': self.callback_btn_close } )
 
         return h
