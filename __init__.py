@@ -40,6 +40,18 @@ class Command:
         msg_status('Hash copied to clipboard')
 
 
+    def callback_btn_verify(self, id_dlg, id_ctl, data='', info=''):
+
+        prop1 = dlg_proc(id_dlg, DLG_CTL_PROP_GET, name='edit_verify')
+        prop2 = dlg_proc(id_dlg, DLG_CTL_PROP_GET, name='edit_hash')
+        s1 = prop1['val']
+        s2 = prop2['val']
+        ok = bool(s1) and (s1==s2)
+
+        caption = 'Verified' if ok else '?'
+        dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='label_verify_res', prop={'cap':caption} )
+
+
     def init_dlg(self):
 
         HASH_TYPES = ('MD4', 'MD5', 'SHA1')
@@ -79,21 +91,28 @@ class Command:
 
 
         n=dlg_proc(h, DLG_CTL_ADD, 'label')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_hash', 'cap':'Hash &value:', 'x':6, 'y':150, 'w':120 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_hash', 'cap':'&Hash value:', 'x':6, 'y':150, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'props':(True,True,True), 'x':6, 'y':170, 'w':450 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'props':(False,True,True), 'x':6, 'y':170, 'w':450 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_close', 'cap':'&Copy', 'x':460, 'y':170, 'w':100,
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_copy', 'cap':'&Copy', 'x':460, 'y':170, 'w':100,
           'on_change': self.callback_btn_copy } )
 
 
         n=dlg_proc(h, DLG_CTL_ADD, 'label')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_varify', 'cap':'&Enter hash to verify:', 'x':6, 'y':205, 'w':120 } )
 
+        n=dlg_proc(h, DLG_CTL_ADD, 'label')
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_verify_res', 'cap':'?', 'props':True, 'x':100, 'y':205, 'w':355 } )
+
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_verify', 'props':(False,True,True), 'x':6, 'y':225, 'w':450 } )
+
+        n=dlg_proc(h, DLG_CTL_ADD, 'button')
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_verify', 'cap':'&Verify', 'x':460, 'y':225, 'w':100,
+          'on_change': self.callback_btn_verify } )
 
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
