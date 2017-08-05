@@ -1,4 +1,14 @@
 from cudatext import *
+from .proc_hash import *
+
+HASH_KINDS = (
+  'MD4',
+  'MD5',
+  'SHA1',
+  'CRC32'
+  )
+HASH_KIND_INIT = 1
+
 
 class Command:
 
@@ -7,7 +17,19 @@ class Command:
         caption = '&Hash -- '+('file' if is_file else 'string')
         dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='label_hash', prop={'cap': caption} )
 
-        print('Hash from', ('file:' if is_file else 'string:'), repr(data) )
+        index = int(dlg_proc(id_dlg, DLG_CTL_PROP_GET, name='combo_type')['val'])
+        kind = HASH_KINDS[index]
+
+        res = ''
+        if kind=='MD5':
+            if is_file:
+                res = get_file_md5(data)
+            else:
+                res = get_string_md5(data)
+
+        dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='edit_hash', prop={'val':res} )
+
+        print('Hash', kind, 'of', ('file:' if is_file else 'string:'), repr(data) )
 
 
     def callback_btn_string(self, id_dlg, id_ctl, data='', info=''):
@@ -54,9 +76,6 @@ class Command:
 
     def init_dlg(self):
 
-        HASH_TYPES = ('MD4', 'MD5', 'SHA1')
-        HASH_KIND = 1
-
         h=dlg_proc(0, DLG_CREATE)
         dlg_proc(h, DLG_PROP_SET, prop={'cap':'Hash Generator', 'w':570, 'h':320 })
 
@@ -65,8 +84,8 @@ class Command:
 
         n=dlg_proc(h, DLG_CTL_ADD, 'combo_ro')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'combo_type', 'x':120, 'y':6, 'w':150,
-          'items': '\t'.join(HASH_TYPES),
-          'val': HASH_KIND } )
+          'items': '\t'.join(HASH_KINDS),
+          'val': HASH_KIND_INIT } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'label')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'chk_from_str', 'cap':'Calculate hash from &string:', 'x':6, 'y':40, 'w':120 } )
