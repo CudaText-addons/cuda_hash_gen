@@ -128,7 +128,7 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_hash', 'cap':'&Hash value:', 'x':6, 'y':150, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'props':(False,True,True), 'x':6, 'y':170, 'w':550 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'props':(True,True,True), 'x':6, 'y':170, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_copy', 'cap':'&Copy', 'x':560, 'y':170, 'w':100,
