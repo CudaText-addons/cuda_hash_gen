@@ -15,8 +15,12 @@ def get_hashlib_string(s, name):
 def get_hash_universal(kind, data, is_file):
 
     kind = kind.lower()
-    if is_file:
-        res = get_hashlib_file(data, kind)
-    else:
-        res = get_hashlib_string(data, kind)
+    try:
+        if is_file:
+            res = get_hashlib_file(data, kind)
+        else:
+            res = get_hashlib_string(data, kind)
+    except:
+        res = '(error)'
+
     return res
