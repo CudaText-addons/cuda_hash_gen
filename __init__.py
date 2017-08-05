@@ -20,13 +20,7 @@ class Command:
         index = int(dlg_proc(id_dlg, DLG_CTL_PROP_GET, name='combo_type')['val'])
         kind = HASH_KINDS[index]
 
-        res = ''
-        if kind=='MD5':
-            if is_file:
-                res = get_file_md5(data)
-            else:
-                res = get_string_md5(data)
-
+        res = get_hash_universal(kind, data, is_file)
         dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='edit_hash', prop={'val':res} )
 
         print('Hash', kind, 'of', ('file:' if is_file else 'string:'), repr(data) )
