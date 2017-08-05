@@ -8,12 +8,17 @@ HASH_KINDS = (
   'SHA256',
   'SHA512',
   )
-HASH_KIND_INIT = 1
+HASH_KIND_INITIAL = 1
 
 
 class Command:
+    data = ''
+    is_file = False
 
     def calc(self, id_dlg, data, is_file):
+
+        self.data = data
+        self.is_file = is_file
 
         caption = '&Hash -- of '+('file' if is_file else 'string')+':'
         dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='label_hash', prop={'cap': caption} )
@@ -28,6 +33,11 @@ class Command:
         print('Hash', kind, 'of', ('file:' if is_file else 'string:'), repr(data) )
         #must verify too
         self.callback_btn_verify(id_dlg, 0)
+
+
+    def callback_type(self, id_dlg, id_ctl, data='', info=''):
+
+        self.calc(id_dlg, self.data, self.is_file)
 
 
     def callback_btn_string(self, id_dlg, id_ctl, data='', info=''):
@@ -83,7 +93,10 @@ class Command:
         n=dlg_proc(h, DLG_CTL_ADD, 'combo_ro')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'combo_type', 'x':120, 'y':6, 'w':150,
           'items': '\t'.join(HASH_KINDS),
-          'val': HASH_KIND_INIT } )
+          'val': HASH_KIND_INITIAL,
+          'on_change': self.callback_type,
+          'act': True
+           } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'label')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'chk_from_str', 'cap':'Calculate hash from &string:', 'x':6, 'y':40, 'w':120 } )
