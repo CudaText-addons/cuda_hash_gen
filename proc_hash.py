@@ -30,6 +30,10 @@ def get_hash_md4_file(filename):
     return _digest_str(h.digest())
 
 
+def get_hash_ripemd160_string(s):
+    return hashlib.new('ripemd160', s).hexdigest()
+
+
 def get_hash_universal(kind, data, is_file):
     res = ''
 
@@ -45,11 +49,23 @@ def get_hash_universal(kind, data, is_file):
         else:
             res = get_hashlib_string(data, hashlib.sha1)
 
+    elif kind=='SHA224':
+        if is_file:
+            res = get_hashlib_file(data, hashlib.sha224)
+        else:
+            res = get_hashlib_string(data, hashlib.sha224)
+
     elif kind=='SHA256':
         if is_file:
             res = get_hashlib_file(data, hashlib.sha256)
         else:
             res = get_hashlib_string(data, hashlib.sha256)
+
+    elif kind=='SHA384':
+        if is_file:
+            res = get_hashlib_file(data, hashlib.sha384)
+        else:
+            res = get_hashlib_string(data, hashlib.sha384)
 
     elif kind=='SHA512':
         if is_file:
