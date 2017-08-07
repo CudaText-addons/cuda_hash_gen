@@ -3,6 +3,7 @@ from .proc_hash import *
 
 
 class Command:
+    id_dlg = None
     data = ''
     is_file = False
 
@@ -41,7 +42,6 @@ class Command:
     def callback_btn_close(self, id_dlg, id_ctl, data='', info=''):
 
         dlg_proc(id_dlg, DLG_HIDE, 0)
-        dlg_proc(id_dlg, DLG_FREE, 0)
 
 
     def callback_btn_file(self, id_dlg, id_ctl, data='', info=''):
@@ -142,7 +142,9 @@ class Command:
 
         return h
 
-    def dialog(self):
-        self.h_dlg = self.init_dlg()
-        dlg_proc(self.h_dlg, DLG_SHOW_NONMODAL)
 
+    def dialog(self):
+
+        if not self.id_dlg:
+            self.id_dlg = self.init_dlg()
+        dlg_proc(self.id_dlg, DLG_SHOW_NONMODAL)

@@ -1,3 +1,6 @@
 
+2017.08.07
++ allow only one non-modal dialog (not n instances)
+
 2017.08.05
 init
