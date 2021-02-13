@@ -1,6 +1,9 @@
 
+2021.02.12
++ add: support translation (patch by Markus)
+
 2017.08.07
 + allow only one non-modal dialog (not n instances)
 
 2017.08.05
-init
+initial version
