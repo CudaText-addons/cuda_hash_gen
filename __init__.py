@@ -15,7 +15,7 @@ class Command:
         self.data = data
         self.is_file = is_file
 
-        caption = _('&Hash -- of {}:')-format(_('file') if is_file else _('string'))
+        caption = _('&Hash -- of {}:').format(_('file') if is_file else _('string'))
         dlg_proc(id_dlg, DLG_CTL_PROP_SET, name='label_hash', prop={'cap': caption} )
 
         index = int(dlg_proc(id_dlg, DLG_CTL_PROP_GET, name='combo_type')['val'])
