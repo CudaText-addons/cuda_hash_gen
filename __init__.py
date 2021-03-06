@@ -107,7 +107,7 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'chk_from_file', 'cap':_('Calculate hash from &file:'), 'x':6, 'y':95, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_file', 'props':(True,False,True), 'x':6, 'y':115, 'w':550 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_file', 'ex0': True, 'ex1': False, 'ex2': True, 'x':6, 'y':115, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_file', 'cap':_('&Browse...'), 'x':560, 'y':115, 'w':100,
@@ -118,7 +118,7 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_hash', 'cap':_('&Hash value:'), 'x':6, 'y':150, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'props':(True,True,True), 'x':6, 'y':170, 'w':550 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_hash', 'ex0': True, 'ex1': True, 'ex2': True, 'x':6, 'y':170, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_copy', 'cap':_('&Copy'), 'x':560, 'y':170, 'w':100,
@@ -129,10 +129,10 @@ class Command:
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_varify', 'cap':_('&Enter hash to verify:'), 'x':6, 'y':205, 'w':120 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'label')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_verify_res', 'cap':'?', 'props':True, 'x':100, 'y':205, 'w':355 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'label_verify_res', 'cap':'?', 'ex0': True, 'x':100, 'y':205, 'w':355 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'edit')
-        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_verify', 'props':(False,True,True), 'x':6, 'y':225, 'w':550 } )
+        dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'edit_verify', 'ex0': False, 'ex1': True, 'ex2': True, 'x':6, 'y':225, 'w':550 } )
 
         n=dlg_proc(h, DLG_CTL_ADD, 'button')
         dlg_proc(h, DLG_CTL_PROP_SET, index=n, prop={'name': 'btn_verify', 'cap':_('&Verify'), 'x':560, 'y':225, 'w':100,
