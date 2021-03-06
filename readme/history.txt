@@ -1,4 +1,7 @@
 
+2021.03.06
+- fix: avoid deprecated API
+
 2021.02.12
 + add: support translation (patch by Markus)
 
